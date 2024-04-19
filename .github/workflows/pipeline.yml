@@ -28,3 +28,21 @@ jobs:
       run: npm run test:unit
     - name: Display username    
       run: echo "dkoeva"
+  
+  ui_tests:
+
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    steps:
+    - name: Checkuot the repository
+      uses: actions/checkout@v3
+    - name: Use Node.js version 20.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: Install dependencies 
+      run: npm install
+    - name: Run unit tests     
+      run: npm run test:ui
+
